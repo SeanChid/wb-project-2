@@ -20,8 +20,22 @@ const SW1525 = await Flight.create({
     price: 70
 })
 
-const sampBooking = await Booking.create({
-    bookingId: 3469,
-    flightNum: 123,
-    numSeat: 3
+const DL815 = await Flight.create({
+    flightNum: 815,
+    flightDate: '2024-10-07',
+    airline: 'Delta',
+    depAirport: 'SLC',
+    arrAirport: 'SNA',
+    availSeats: 100,
+    price: 270
+})
+
+const AA7521 = await Flight.create({
+    flightNum: 7521,
+    flightDate: '2024-10-07',
+    airline: 'American',
+    depAirport: 'SLC',
+    arrAirport: 'DFW',
+    availSeats: 150,
+    price: 310
 })

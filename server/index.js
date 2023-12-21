@@ -20,4 +20,4 @@ app.put('/booking/:bookingId', putFlight)
 app.delete('/booking/:bookingId', deleteBooking)
 app.put('/booking/edit/:bookingId', editBooking)
 
-ViteExpress.listen(app, 5000, () => console.log("5000 is up and running"))
+ViteExpress.listen(app, 3000, () => console.log("3000 is up and running"))

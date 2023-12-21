@@ -8,8 +8,8 @@ const handlerFunctions = {
     },
 
     getBookings: async (req, res) => {
-        const bookingsData = await Booking.findAll()
-        res.send(bookingsData)
+        const bookingData = await Booking.findAll()
+        res.send(bookingData)
     },
 
     getOneBooking: async (req, res) => {
@@ -29,8 +29,8 @@ const handlerFunctions = {
         }
 
         await Booking.create(newBooking)
-        const bookingsData = await Booking.findAll()
-        res.send(bookingsData)
+        const bookingData = await Booking.findAll()
+        res.send(bookingData)
     },
 
     putFlight: async (req, res) => {
@@ -42,14 +42,14 @@ const handlerFunctions = {
 
         currentBooking.setFlight(flight)
 
-        flight.availSeats = flight.availSeats - currentBooking.numSeat
+        flight.availSeats -= currentBooking.numSeat
         currentBooking.totalPrice = flight.price * currentBooking.numSeat
 
         await currentBooking.save()
         await flight.save()
 
-        const bookingsData = await Booking.findAll()
-        res.send(bookingsData)
+        const bookingData = await Booking.findAll()
+        res.send(bookingData)
     },
 
     deleteBooking: async (req, res) => {
@@ -58,18 +58,47 @@ const handlerFunctions = {
         const currentBooking = await Booking.findByPk(bookingId)
         const flight = await Flight.findByPk(currentBooking.flightNum)
 
-        flight.availSeats = flight.availSeats + currentBooking.numSeat
+        flight.availSeats += currentBooking.numSeat
 
         await currentBooking.destroy()
         await flight.save()
 
-        const bookingsData = await Booking.findAll()
-        res.send(bookingsData)
+        const bookingData = await Booking.findAll()
+        res.send(bookingData)
     },
 
     editBooking: async (req, res) => {
         const {bookingId} = req.params
+        const {flightNum, numSeat} = req.body
 
+        const currentBooking = await Booking.findByPk(bookingId)
+        const currentFlight = await Flight.findByPk(currentBooking.flightNum)
+        const newFlight = await Flight.findByPk(flightNum)
+
+        if (currentBooking.flightNum === newFlight.flightNum) {
+            currentBooking.setFlight(currentFlight)
+            currentFlight.availSeats += currentBooking.numSeat
+            currentFlight.availSeats -= numSeat
+            currentBooking.totalPrice = currentFlight.price * numSeat
+            
+            await currentFlight.save()
+        } else {
+            currentBooking.setFlight(currentFlight)
+            currentFlight.availSeats += currentBooking.numSeat
+            currentBooking.setFlight(newFlight)
+            newFlight.availSeats -= numSeat
+            currentBooking.totalPrice = newFlight.price * numSeat
+
+            await currentFlight.save()
+            await newFlight.save()
+        }
+        
+        currentBooking.numSeat = numSeat
+        
+        await currentBooking.save()
+
+        const bookingData = await Booking.findAll()
+        res.send(bookingData)
     }
 
 }
