@@ -58,10 +58,14 @@ const handlerFunctions = {
         const currentBooking = await Booking.findByPk(bookingId)
         const flight = await Flight.findByPk(currentBooking.flightNum)
 
-        flight.availSeats += currentBooking.numSeat
-
-        await currentBooking.destroy()
-        await flight.save()
+        if (currentBooking.flightNum === null) {
+            await currentBooking.destroy()
+        } else {
+            flight.availSeats += currentBooking.numSeat
+    
+            await currentBooking.destroy()
+            await flight.save()
+        }
 
         const bookingData = await Booking.findAll()
         res.send(bookingData)

@@ -7,6 +7,25 @@ import TableRow from './TableRow.jsx'
 import { useState, useEffect } from 'react'
 
 const FlightTable = () => {
+
+    const [flightData, setFlightData] = useState([])
+
+    useEffect(() => {
+        axios.get('/flights')
+        .then((res) => {
+            console.log(res.data)
+            setFlightData(res.data)
+        })
+        .catch((theseHands) => {
+            console.log(theseHands)
+        })
+    }, [])
+
+    const row = flightData.map((el) => <TableRow
+        key={el.flightNum}
+        flightData={el}
+    />)
+
     return (
         <div>
             <table>
@@ -15,7 +34,7 @@ const FlightTable = () => {
                 </thead>
 
                 <tbody>
-                    <TableRow />
+                    {row}
                 </tbody>
 
                 <tfoot>

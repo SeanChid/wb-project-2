@@ -1,14 +1,26 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
 
 const TravelForm = () => {
-    const navigate = useNavigate()
 
+    const [numSeat, setNumSeat] = useState(null)
+    const navigate = useNavigate()
+    
     const handleSubmit = (e) => {
         e.preventDefault()
-
-        navigate('/flight-selection')
+        
+        axios.post(`/booking`, {numSeat: numSeat})
+        .then((res) => {
+            console.log(res.data)
+            setNumSeat(res.data.newNumSeat)
+            navigate('/flight-selection')
+        })
+        .catch((theseHands) => {
+            console.log(theseHands)
+        })
+        
     }
 
     return (
@@ -42,7 +54,8 @@ const TravelForm = () => {
                 How many travelers?:
                 <input
                     type="number"
-                    name="numSeat"
+                    value={numSeat}
+                    onChange={(e) => setNumSeat(e.target.value)}
                 />
             </label>
             <br/>

@@ -7,6 +7,7 @@ const ConfirmFlightButton = (props) => {
     return (
         <tr>
             <td></td>
+            <td></td>
             <td>
                 <button onClick={putFlight}>Confirm</button>
             </td>
