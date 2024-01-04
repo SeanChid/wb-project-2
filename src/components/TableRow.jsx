@@ -2,28 +2,26 @@ import { useState, useEffect } from 'react'
 
 const TableRow = (props) => {
 
-    const {flightData} = props
-
-    const [selectedFlight, setSelectedFlight] = useState(null)
+    const {flightData, selectedFlight, setSelectedFlight} = props
 
     useEffect(() => {
         console.log(selectedFlight)
     }, [selectedFlight])
 
-    const handleFlightSelection = (flightNum) => {
-        setSelectedFlight(flightNum)
+    const handleFlightSelection = (flight) => {
+        
+        setSelectedFlight((prevSelected) => (prevSelected === flight ? null : flight))
     }
 
     return (
-        <tr key={flightData.flightNum}
-        className={selectedFlight === flightData.flightNum ? 'selected' : ''}>
+        <tr key={flightData.flightNum}>
             <td>{flightData.airline}</td>
             <td>{flightData.flightNum}</td>
             <td>{flightData.flightDate}</td>
             <td>{flightData.availSeats}</td>
             <td>{flightData.price}</td>
             <td>
-                <button onClick={() => handleFlightSelection(flightData.flightNum)}>
+                <button onClick={() => handleFlightSelection(flightData)}>
                     Select
                 </button>
             </td>
