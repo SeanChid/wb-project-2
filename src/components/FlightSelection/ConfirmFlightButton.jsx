@@ -2,14 +2,14 @@ import React from 'react'
 
 const ConfirmFlightButton = (props) => {
 
-    const {putFlight} = props
+    const {handleClick} = props
 
     return (
         <tr>
             <td></td>
             <td></td>
             <td>
-                <button onClick={putFlight}>Confirm</button>
+                <button onClick={handleClick}>Confirm</button>
             </td>
         </tr>
     )

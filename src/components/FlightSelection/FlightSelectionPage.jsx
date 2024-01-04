@@ -1,5 +1,5 @@
 import React from 'react'
-import ReturnHomeButton from './ReturnHomeButton.jsx'
+import ReturnHomeButton from '../ReturnHomeButton.jsx'
 import FlightTable from './FlightTable.jsx'
 
 const FlightSelectionPage = () => {

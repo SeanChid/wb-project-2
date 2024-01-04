@@ -5,6 +5,7 @@ import ConfirmFlightButton from './ConfirmFlightButton.jsx'
 import TableRow from './TableRow.jsx'
 
 import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const FlightTable = () => {
 
@@ -42,12 +43,19 @@ const FlightTable = () => {
         })
     }
 
+    const navigate = useNavigate()
+
     const row = flightData.map((el) => <TableRow
         key={el.flightNum}
         flightData={el}
         selectedFlight={selectedFlight}
         setSelectedFlight={setSelectedFlight}
     />)
+
+    const handleClick = () => {
+        putFlight()
+        navigate('/confirm-booking')
+    }
 
     return (
         <div>
@@ -61,7 +69,7 @@ const FlightTable = () => {
                 </tbody>
 
                 <tfoot>
-                    <ConfirmFlightButton putFlight={putFlight}/>
+                    <ConfirmFlightButton handleClick={handleClick}/>
                 </tfoot>
             </table>
         </div>
