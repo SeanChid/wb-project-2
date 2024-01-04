@@ -4,9 +4,9 @@ const TableRow = (props) => {
 
     const {flightData, selectedFlight, setSelectedFlight} = props
 
-    useEffect(() => {
-        console.log(selectedFlight)
-    }, [selectedFlight])
+    // useEffect(() => {
+    //     console.log(selectedFlight)
+    // }, [selectedFlight])
 
     const handleFlightSelection = (flight) => {
         
@@ -19,7 +19,7 @@ const TableRow = (props) => {
             <td>{flightData.flightNum}</td>
             <td>{flightData.flightDate}</td>
             <td>{flightData.availSeats}</td>
-            <td>{flightData.price}</td>
+            <td>${flightData.price}</td>
             <td>
                 <button onClick={() => handleFlightSelection(flightData)}>
                     Select
