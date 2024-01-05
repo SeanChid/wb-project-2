@@ -19,33 +19,22 @@ const handlerFunctions = {
     },
 
     addBooking: async (req, res) => {
-        const {numSeat} = req.body
+        const {flightNum, numSeat} = req.body
+        
+        const flight = await Flight.findByPk(flightNum)
 
         const id = Math.floor(1000000 + Math.random() * 9000000)
 
         const newBooking = {
             bookingId: id,
+            flightNum,
             numSeat
         }
 
+        flight.availSeats -= numSeat
+        newBooking.totalPrice = flight.price * numSeat
+
         await Booking.create(newBooking)
-        const bookingData = await Booking.findAll()
-        res.send(bookingData)
-    },
-
-    putFlight: async (req, res) => {
-        const {bookingId} = req.params
-        const {flightNum} = req.body
-
-        const currentBooking = await Booking.findByPk(bookingId)
-        const flight = await Flight.findByPk(flightNum)
-
-        currentBooking.setFlight(flight)
-
-        flight.availSeats -= currentBooking.numSeat
-        currentBooking.totalPrice = flight.price * currentBooking.numSeat
-
-        await currentBooking.save()
         await flight.save()
 
         const bookingData = await Booking.findAll()

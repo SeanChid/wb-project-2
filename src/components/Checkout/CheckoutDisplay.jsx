@@ -5,22 +5,25 @@ import CheckoutRow from './CheckoutRow.jsx'
 import CheckoutConfirm from './CheckoutConfirm.jsx'
 
 import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 
 const CheckoutDisplay = () => {
 
-    const [currentBooking, setCurrentBooking] = useState([])
+    const location = useLocation()
+    const {numSeat, selectedFlight} = location.state
 
-    useEffect(() => {
-        axios.get('/bookings')
-        .then((res) => {
-            setCurrentBooking(res.data[res.data.length-1])
-        })
-    }, [])
+    const [booking, setBooking] = useState([])
 
     const navigate = useNavigate()
 
     const handleClick = () => {
+        axios.post('/booking', {numSeat: numSeat, flightNum: selectedFlight.flightNum})
+        .then((res) => {
+            setBooking(res.data)
+        })
+        .catch((theseHands) => {
+            console.log(theseHands)
+        })
         navigate('/')
     }
 
@@ -32,7 +35,7 @@ const CheckoutDisplay = () => {
                 </thead>
 
                 <tbody>
-                    <CheckoutRow currentBooking={currentBooking}/>
+                    <CheckoutRow numSeat={numSeat} selectedFlight={selectedFlight}/>
                 </tbody>
 
                 <tfoot>

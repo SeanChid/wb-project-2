@@ -2,13 +2,13 @@ import React from 'react'
 
 const CheckoutRow = (props) => {
 
-    const {currentBooking} = props
+    const {numSeat, selectedFlight} = props
 
     return (
         <tr>
-            <td>{currentBooking.flightNum}</td>
-            <td>{currentBooking.numSeat}</td>
-            <td>${currentBooking.totalPrice}</td>
+            <td>{selectedFlight.flightNum}</td>
+            <td>{numSeat}</td>
+            <td>${selectedFlight.price * numSeat}</td>
         </tr>
     )
 }
