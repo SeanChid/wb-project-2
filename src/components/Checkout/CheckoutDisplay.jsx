@@ -4,7 +4,7 @@ import CheckoutHeader from './CheckoutHeader.jsx'
 import CheckoutRow from './CheckoutRow.jsx'
 import CheckoutConfirm from './CheckoutConfirm.jsx'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 
 const CheckoutDisplay = () => {
@@ -20,11 +20,12 @@ const CheckoutDisplay = () => {
         axios.post('/booking', {numSeat: numSeat, flightNum: selectedFlight.flightNum})
         .then((res) => {
             setBooking(res.data)
+            console.log(res.data)
         })
         .catch((theseHands) => {
             console.log(theseHands)
         })
-        navigate('/')
+        navigate('/booking-details', {state: {booking}})
     }
 
     return (
