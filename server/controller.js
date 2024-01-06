@@ -34,10 +34,9 @@ const handlerFunctions = {
         flight.availSeats -= numSeat
         newBooking.totalPrice = flight.price * numSeat
 
-        await Booking.create(newBooking)
+        const bookingData = await Booking.create(newBooking)
         await flight.save()
 
-        const bookingData = await Booking.findAll()
         res.send(bookingData)
     },
 

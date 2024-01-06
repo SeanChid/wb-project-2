@@ -47,7 +47,11 @@ Flight.init(
         },
         flightDate: {
             type: DataTypes.DATE,
-            allowNull: false
+            allowNull: false,
+            get() {
+                const rawValue = this.getDataValue('flightDate')
+                return rawValue ? rawValue.toISOString().split('T')[0] : null
+            }
         },
         airline: {
             type: DataTypes.STRING

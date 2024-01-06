@@ -5,12 +5,13 @@ import { useNavigate } from 'react-router-dom'
 const TravelForm = () => {
 
     const [numSeat, setNumSeat] = useState(0)
+    const [flightDate, setFlightDate] = useState('')
     const navigate = useNavigate()
     
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        navigate('/flight-selection', {state: {numSeat}})
+        navigate('/flight-selection', {state: {numSeat, flightDate}})
     }
 
     return (
@@ -36,7 +37,8 @@ const TravelForm = () => {
                 Date of departure:
                 <input
                     type="date"
-                    name="flightDate"
+                    value={flightDate}
+                    onChange={(e) => setFlightDate(e.target.value)}
                 />
             </label>
             <br/>

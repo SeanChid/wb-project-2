@@ -10,15 +10,16 @@ import { useNavigate, useLocation } from 'react-router-dom'
 const FlightTable = () => {
 
     const location = useLocation()
-    const {numSeat} = location.state
+    const {numSeat, flightDate} = location.state
+    console.log(flightDate)
 
     const [flightData, setFlightData] = useState([])
     const [selectedFlight, setSelectedFlight] = useState(null)
 
     useEffect(() => {
-        axios.get('/flights')
+        axios.get(`/flights?flightDate=${flightDate}`)
         .then((res) => {
-            // console.log(res.data)
+            console.log(res.data)
             setFlightData(res.data)
         })
         .catch((theseHands) => {

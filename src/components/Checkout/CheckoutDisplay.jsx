@@ -21,11 +21,11 @@ const CheckoutDisplay = () => {
         .then((res) => {
             setBooking(res.data)
             console.log(res.data)
+            navigate('/booking-details', {state: {booking: res.data}})
         })
         .catch((theseHands) => {
             console.log(theseHands)
         })
-        navigate('/booking-details', {state: {booking}})
     }
 
     return (
