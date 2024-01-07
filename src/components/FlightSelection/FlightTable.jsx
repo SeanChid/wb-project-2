@@ -11,7 +11,6 @@ const FlightTable = () => {
 
     const location = useLocation()
     const {numSeat, flightDate} = location.state
-    console.log(flightDate)
 
     const [flightData, setFlightData] = useState([])
     const [selectedFlight, setSelectedFlight] = useState(null)
@@ -19,7 +18,6 @@ const FlightTable = () => {
     useEffect(() => {
         axios.get(`/flights?flightDate=${flightDate}`)
         .then((res) => {
-            console.log(res.data)
             setFlightData(res.data)
         })
         .catch((theseHands) => {

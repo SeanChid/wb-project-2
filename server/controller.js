@@ -1,9 +1,21 @@
-import { Booking, Flight } from "./db/model.js";
+import { Booking, Flight } from "./db/model.js"
+import { Op } from 'sequelize'
 
 const handlerFunctions = {
 
     getFlights: async (req, res) => {
-        const flightData = await Flight.findAll()
+        const {flightDate} = req.query
+        const startDate = new Date(`${flightDate}T00:00:00Z`)
+        const endDate = new Date(`${flightDate}T23:59:59Z`)
+
+        const flightData = await Flight.findAll({
+            where: {
+                flightDate: {
+                    [Op.gte]: startDate,
+                    [Op.lt]: endDate
+                }
+            }
+        })
         res.send(flightData)
     },
 
