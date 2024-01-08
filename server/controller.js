@@ -4,18 +4,28 @@ import { Op } from 'sequelize'
 const handlerFunctions = {
 
     getFlights: async (req, res) => {
-        const {flightDate} = req.query
-        const startDate = new Date(`${flightDate}T00:00:00Z`)
-        const endDate = new Date(`${flightDate}T23:59:59Z`)
+        const {flightDate, depAirport, arrAirport } = req.query
+
+        const query = {}
+        if (flightDate) {
+            const startDate = new Date(`${flightDate}T00:00:00Z`)
+            const endDate = new Date(`${flightDate}T23:59:59Z`)
+            query.flightDate = {
+                [Op.gte]: startDate,
+                [Op.lt]: endDate
+            }     
+        }
+        if (depAirport) {
+            query.depAirport = depAirport
+        }
+        if (arrAirport) {
+            query.arrAirport= arrAirport
+        }
 
         const flightData = await Flight.findAll({
-            where: {
-                flightDate: {
-                    [Op.gte]: startDate,
-                    [Op.lt]: endDate
-                }
-            }
+            where: query
         })
+
         res.send(flightData)
     },
 

@@ -4,14 +4,17 @@ import { useNavigate } from 'react-router-dom'
 
 const TravelForm = () => {
 
+    const [depAirport, setDepAirport] = useState('')
+    const [arrAirport, setArrAirport] = useState('')
     const [numSeat, setNumSeat] = useState(0)
     const [flightDate, setFlightDate] = useState('')
+
     const navigate = useNavigate()
     
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        navigate('/flight-selection', {state: {numSeat, flightDate}})
+        navigate('/flight-selection', {state: {depAirport, arrAirport, numSeat, flightDate}})
     }
 
     return (
@@ -21,7 +24,8 @@ const TravelForm = () => {
                 From:
                 <input
                     type="text"
-                    name="depAirport"
+                    value={depAirport}
+                    onChange={(e) => setDepAirport(e.target.value)}
                 />
             </label>
             <br/>
@@ -29,16 +33,8 @@ const TravelForm = () => {
                 To:
                 <input
                     type="text"
-                    name="arrAirport"
-                />
-            </label>
-            <br/>
-            <label>
-                Date of departure:
-                <input
-                    type="date"
-                    value={flightDate}
-                    onChange={(e) => setFlightDate(e.target.value)}
+                    value={arrAirport}
+                    onChange={(e) => setArrAirport(e.target.value)}
                 />
             </label>
             <br/>
@@ -48,6 +44,15 @@ const TravelForm = () => {
                     type="number"
                     value={numSeat}
                     onChange={(e) => setNumSeat(e.target.value)}
+                />
+            </label>
+            <br/>
+            <label>
+                Date of departure:
+                <input
+                    type="date"
+                    value={flightDate}
+                    onChange={(e) => setFlightDate(e.target.value)}
                 />
             </label>
             <br/>
