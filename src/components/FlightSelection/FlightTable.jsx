@@ -11,32 +11,15 @@ const FlightTable = () => {
 
     const location = useLocation()
     const {depAirport, arrAirport, numSeat, flightDate} = location.state
-
+    
     const [flightData, setFlightData] = useState([])
     const [selectedFlight, setSelectedFlight] = useState(null)
 
-    const options = {
-        method: 'GET',
-        url: 'https://flight-info-api.p.rapidapi.com/schedules',
-        params: {
-          CodeType: 'IATA',
-          ArrivalAirport: arrAirport,
-          DepartureAirport: depAirport,
-          DepartureDateTime: flightDate,
-          version: 'v2'
-        },
-        headers: {
-          'X-RapidAPI-Key': 'c966d2f2f2msh3b9a6d2f669cd79p125115jsn5e7c22c47151',
-          'X-RapidAPI-Host': 'flight-info-api.p.rapidapi.com'
-        }
-    }
-
     useEffect(() => {
-        // axios.get(`/flights?flightDate=${flightDate}&depAirport=${depAirport}&arrAirport=${arrAirport}`)
-        axios.request(options)
+        axios.get(`/flights?flightDate=${flightDate}&depAirport=${depAirport}&arrAirport=${arrAirport}`)
         .then((res) => {
-            console.log(res.data.data)
-            setFlightData(res.data.data)
+            console.log(res.data)
+            setFlightData(res.data)
         })
         .catch((theseHands) => {
             console.log(theseHands)
@@ -46,7 +29,7 @@ const FlightTable = () => {
     const navigate = useNavigate()
 
     const row = flightData.map((el) => <TableRow
-        key={el.flightNumber}
+        key={el.flightNum}
         flightData={el}
         selectedFlight={selectedFlight}
         setSelectedFlight={setSelectedFlight}
