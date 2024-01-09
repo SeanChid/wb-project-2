@@ -7,6 +7,7 @@ const ReturnHomeButton = () => {
     const handleButtonClick = () => {
         navigate('/')
     }
+    
     return <button onClick={handleButtonClick}>Return Home</button>
 }
 

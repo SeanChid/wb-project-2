@@ -38,11 +38,8 @@ const CheckoutDisplay = () => {
                 <tbody>
                     <CheckoutRow numSeat={numSeat} selectedFlight={selectedFlight}/>
                 </tbody>
-
-                <tfoot>
-                    <CheckoutConfirm handleClick={handleClick}/>
-                </tfoot>
             </table>
+            <CheckoutConfirm handleClick={handleClick}/>
         </div>
     )
 }

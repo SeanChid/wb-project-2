@@ -15,10 +15,28 @@ const FlightTable = () => {
     const [flightData, setFlightData] = useState([])
     const [selectedFlight, setSelectedFlight] = useState(null)
 
+    const options = {
+        method: 'GET',
+        url: 'https://flight-info-api.p.rapidapi.com/schedules',
+        params: {
+          CodeType: 'IATA',
+          ArrivalAirport: arrAirport,
+          DepartureAirport: depAirport,
+          DepartureDateTime: flightDate,
+          version: 'v2'
+        },
+        headers: {
+          'X-RapidAPI-Key': 'c966d2f2f2msh3b9a6d2f669cd79p125115jsn5e7c22c47151',
+          'X-RapidAPI-Host': 'flight-info-api.p.rapidapi.com'
+        }
+    }
+
     useEffect(() => {
-        axios.get(`/flights?flightDate=${flightDate}&depAirport=${depAirport}&arrAirport=${arrAirport}`)
+        // axios.get(`/flights?flightDate=${flightDate}&depAirport=${depAirport}&arrAirport=${arrAirport}`)
+        axios.request(options)
         .then((res) => {
-            setFlightData(res.data)
+            console.log(res.data.data)
+            setFlightData(res.data.data)
         })
         .catch((theseHands) => {
             console.log(theseHands)
@@ -28,14 +46,14 @@ const FlightTable = () => {
     const navigate = useNavigate()
 
     const row = flightData.map((el) => <TableRow
-        key={el.flightNum}
+        key={el.flightNumber}
         flightData={el}
         selectedFlight={selectedFlight}
         setSelectedFlight={setSelectedFlight}
     />)
 
     const handleClick = () => {
-        navigate('/confirm-booking', {state: {numSeat, selectedFlight}})
+        navigate('/confirm-booking', {state: {numSeat, selectedFlight, depAirport, arrAirport, flightDate}})
     }
 
     return (
@@ -48,11 +66,8 @@ const FlightTable = () => {
                 <tbody>
                     {row}
                 </tbody>
-
-                <tfoot>
-                    <ConfirmFlightButton handleClick={handleClick}/>
-                </tfoot>
             </table>
+            <ConfirmFlightButton handleClick={handleClick}/>
         </div>
     )
 }

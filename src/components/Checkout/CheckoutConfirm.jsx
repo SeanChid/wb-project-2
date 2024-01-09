@@ -4,14 +4,7 @@ const CheckoutConfirm = (props) => {
 
     const {handleClick} = props
 
-    return (
-        <tr>
-            <td></td>
-            <td>
-                <button onClick={handleClick}>Confirm</button>
-            </td>
-        </tr>
-    )
+    return <button onClick={handleClick}>Confirm</button>
 }
 
 export default CheckoutConfirm

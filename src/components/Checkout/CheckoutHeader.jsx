@@ -3,7 +3,8 @@ import React from 'react'
 const CheckoutHeader = () => {
     return (
         <tr>
-            <th>Flight Number</th>
+            <th>Airline</th>
+            <th>Flight</th>
             <th>Number of Travelers</th>
             <th>Total Price</th>
         </tr>

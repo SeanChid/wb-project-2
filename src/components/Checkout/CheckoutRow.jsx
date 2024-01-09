@@ -6,6 +6,7 @@ const CheckoutRow = (props) => {
 
     return (
         <tr>
+            <td>{selectedFlight.airline}</td>
             <td>{selectedFlight.flightNum}</td>
             <td>{numSeat}</td>
             <td>${selectedFlight.price * numSeat}</td>
