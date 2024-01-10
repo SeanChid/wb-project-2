@@ -2,15 +2,24 @@ import React from "react"
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 
 const GetBookingForm = () => {
     const navigate = useNavigate()
 
+    const [bookingId, setBookingId] = useState('')
+
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        navigate('/edit-booking')
+        axios.get(`/booking/${bookingId}`)
+        .then((res) => {
+            const booking = res.data
+            navigate('/edit-booking', {state: {booking}})
+        })
+        .catch((theseHands) => {
+            console.log(theseHands)
+        })
     }
 
     return (
@@ -20,7 +29,8 @@ const GetBookingForm = () => {
                 Enter Your Booking ID:
                 <input
                     type='number'
-                    name='bookingId'
+                    value={bookingId}
+                    onChange={(e) => setBookingId(e.target.value)}
                 />
             </label>
             <br/>

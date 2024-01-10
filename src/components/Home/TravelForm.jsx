@@ -1,4 +1,4 @@
-import React from 'react'
+import axios from 'axios'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
@@ -14,7 +14,16 @@ const TravelForm = () => {
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        navigate('/flight-selection', {state: {depAirport, arrAirport, numSeat, flightDate}})
+        axios.get(`/flights?flightDate=${flightDate}&depAirport=${depAirport}&arrAirport=${arrAirport}`)
+        .then((res) => {
+            // console.log(res.data)
+            const flightData = res.data
+            navigate('/flight-selection', {state: {depAirport, arrAirport, numSeat, flightDate, flightData}})
+        })
+        .catch((theseHands) => {
+            console.log(theseHands)
+        })
+        
     }
 
     return (

@@ -1,10 +1,10 @@
-import React from 'react'
 import ReturnHomeButton from '../ReturnHomeButton.jsx'
+import EditBookingDisplay from './EditBookingDisplay.jsx'
 
 const EditBookingPage = () => {
     return (
         <div>
-            <h1>This is the edit booking page</h1>
+            <EditBookingDisplay />
             <ReturnHomeButton />
         </div>
     )

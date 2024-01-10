@@ -4,12 +4,12 @@ import { useNavigate, useLocation } from 'react-router-dom'
 const ReturnToFlightSelection = () => {
 
     const location = useLocation()
-    const {depAirport, arrAirport, numSeat, flightDate} = location.state
+    const {depAirport, arrAirport, numSeat, flightDate, flightData} = location.state
 
     const navigate = useNavigate()
 
     const handleClick = () => {
-        navigate('/flight-selection', {state: {depAirport, arrAirport, numSeat, flightDate}})
+        navigate('/flight-selection', {state: {depAirport, arrAirport, numSeat, flightDate, flightData}})
     }
 
     return <button onClick={handleClick}>Return to Flights</button>
