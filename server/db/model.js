@@ -18,8 +18,24 @@ Booking.init(
             primaryKey: true,
             unique: true
         },
+        flightDate: {
+            type: DataTypes.DATE,
+            get() {
+                const rawValue = this.getDataValue('flightDate')
+                return rawValue ? rawValue.toISOString().split('T')[0] : null
+            }
+        },
+        airline: {
+            type: DataTypes.STRING
+        },
         flightNum: {
             type: DataTypes.INTEGER
+        },
+        depAirport: {
+            type: DataTypes.STRING
+        },
+        arrAirport: {
+            type: DataTypes.STRING
         },
         numSeat: {
             type: DataTypes.INTEGER,

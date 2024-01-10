@@ -8,7 +8,7 @@ import { useNavigate, useLocation } from 'react-router-dom'
 const FlightTable = () => {
 
     const location = useLocation()
-    const {depAirport, arrAirport, numSeat, flightDate, flightData} = location.state
+    const {depAirport, arrAirport, numSeat, flightDate, flightData, booking} = location.state
     
     const [selectedFlight, setSelectedFlight] = useState(null)
 

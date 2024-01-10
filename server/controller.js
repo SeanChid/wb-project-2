@@ -41,7 +41,7 @@ const handlerFunctions = {
     },
 
     addBooking: async (req, res) => {
-        const {flightNum, numSeat} = req.body
+        const {airline, flightNum, flightDate, depAirport, arrAirport, numSeat} = req.body
         
         const flight = await Flight.findByPk(flightNum)
 
@@ -49,9 +49,18 @@ const handlerFunctions = {
 
         const newBooking = {
             bookingId: id,
+            airline,
             flightNum,
+            flightDate,
+            depAirport,
+            arrAirport,
             numSeat
         }
+
+        newBooking.airline = flight.airline
+        newBooking.flightDate = flight.flightDate
+        newBooking.depAirport = flight.depAirport
+        newBooking.arrAirport = flight.arrAirport
 
         flight.availSeats -= numSeat
         newBooking.totalPrice = flight.price * numSeat
