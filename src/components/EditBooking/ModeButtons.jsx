@@ -1,11 +1,10 @@
 const ModeButtons = (props) => {
 
-    const {isEditing, changeEditMode, changeNormalMode, submitChange} = props
+    const {isEditing, changeEditMode, changeNormalMode} = props
 
     if (isEditing) {
         return (
             <div>
-                <button onClick={submitChange}>Submit</button>
                 <button onClick={changeNormalMode}>Cancel</button>
             </div>
         )

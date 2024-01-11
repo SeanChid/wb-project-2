@@ -1,5 +1,12 @@
-const EditBookingHeader = () => {
-    return (
+const EditBookingHeader = (props) => {
+
+    const {isEditing} = props
+
+    return isEditing? (
+        <tr>
+            <th>Edit</th>
+        </tr>
+    ) : (
         <tr>
             <th>Booking ID</th>
             <th>Date</th>

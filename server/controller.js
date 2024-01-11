@@ -110,6 +110,10 @@ const handlerFunctions = {
             currentFlight.availSeats += currentBooking.numSeat
             currentBooking.setFlight(newFlight)
             newFlight.availSeats -= numSeat
+            currentBooking.flightDate = newFlight.flightDate
+            currentBooking.airline = newFlight.airline
+            currentBooking.depAirport = newFlight.depAirport
+            currentBooking.arrAirport = newFlight.arrAirport
             currentBooking.totalPrice = newFlight.price * numSeat
 
             await currentFlight.save()
@@ -120,7 +124,7 @@ const handlerFunctions = {
         
         await currentBooking.save()
 
-        const bookingData = await Booking.findAll()
+        const bookingData = await Booking.findByPk(bookingId)
         res.send(bookingData)
     }
 

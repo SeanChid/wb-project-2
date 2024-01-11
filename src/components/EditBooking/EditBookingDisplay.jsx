@@ -22,11 +22,12 @@ const EditBookingDisplay = () => {
 
     const navigate = useNavigate()
 
-    const submitChange = () => {
-        axios.get(`/flights`)
+    const submitEdit = (e) => {
+        e.preventDefault()
+        axios.get(`/flights?flightDate=${flightDate}&depAirport=${depAirport}&arrAirport=${arrAirport}`)
         .then((res) => {
             const flightData = res.data
-            navigate('/flight-selection', {state: {booking, flightData}})
+            navigate('/flight-selection', {state: {booking, flightData, numSeat}})
         })
         .catch((theseHands) => {
             console.log(theseHands)
@@ -38,7 +39,9 @@ const EditBookingDisplay = () => {
         <div>
             <table>
                 <thead>
-                    <EditBookingHeader />
+                    <EditBookingHeader 
+                        isEditing={isEditing}
+                    />
                 </thead>
 
                 <tbody>
@@ -53,6 +56,7 @@ const EditBookingDisplay = () => {
                         depAirport={depAirport}
                         arrAirport={arrAirport}
                         numSeat={numSeat}
+                        submitEdit={submitEdit}
                     />
                 </tbody>
             </table>
@@ -60,7 +64,6 @@ const EditBookingDisplay = () => {
                 isEditing={isEditing}
                 changeEditMode={changeEditMode}
                 changeNormalMode={changeNormalMode}
-                submitChange={submitChange}
             />
         </div>
     )

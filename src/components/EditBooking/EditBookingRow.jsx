@@ -1,41 +1,50 @@
 const EditBookingRow = (props) => {
 
-    const {booking, flightDate, depAirport, arrAirport, numSeat, isEditing, setFlightDate, setDepAirport, setArrAirport, setNumSeat} = props
+    const {booking, flightDate, depAirport, arrAirport, numSeat, isEditing, submitEdit, setFlightDate, setDepAirport, setArrAirport, setNumSeat} = props
 
     return isEditing? (
         <tr>
-            <td></td>
             <td>
-                <input
-                type='date'
-                value={flightDate}
-                onChange={(e) => setFlightDate(e.target.value)}
-                />
+                <form onSubmit={submitEdit}>
+                    <label>
+                        Date:
+                        <input
+                        type='date'
+                        value={flightDate}
+                        onChange={(e) => setFlightDate(e.target.value)}
+                        />
+                    </label>
+                    <br/>
+                    <label>
+                        From:
+                        <input
+                        type='text'
+                        value={depAirport}
+                        onChange={(e) => setDepAirport(e.target.value)}
+                        />
+                    </label>
+                    <br/>
+                    <label>
+                        To:
+                        <input
+                        type='text'
+                        value={arrAirport}
+                        onChange={(e) => setArrAirport(e.target.value)}
+                        />
+                    </label>
+                    <br/>
+                    <label>
+                        Travelers:
+                        <input
+                        type='number'
+                        value={numSeat}
+                        onChange={(e) => setNumSeat(e.target.value)}
+                        />
+                    </label>
+                    <br/>
+                    <button type='submit'>Submit</button>
+                </form>
             </td>
-            <td></td>
-            <td></td>
-            <td>
-                <input
-                type='text'
-                value={depAirport}
-                onChange={(e) => setDepAirport(e.target.value)}
-                />
-            </td>
-            <td>
-                <input
-                type='text'
-                value={arrAirport}
-                onChange={(e) => setArrAirport(e.target.value)}
-                />
-            </td>
-            <td>
-                <input
-                type='number'
-                value={numSeat}
-                onChange={(e) => setNumSeat(e.target.value)}
-                />
-            </td>
-            <td></td>
         </tr>
     ) : (
         <tr>

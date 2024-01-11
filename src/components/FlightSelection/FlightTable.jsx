@@ -2,13 +2,15 @@ import TableHeader from './TableHeader.jsx'
 import ConfirmFlightButton from './ConfirmFlightButton.jsx'
 import TableRow from './TableRow.jsx'
 
+import axios from 'axios'
 import { useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 
 const FlightTable = () => {
 
     const location = useLocation()
-    const {depAirport, arrAirport, numSeat, flightDate, flightData, booking} = location.state
+    const {depAirport, arrAirport, numSeat, flightDate, flightData} = location.state
+    let {booking} = location.state
     
     const [selectedFlight, setSelectedFlight] = useState(null)
 
@@ -23,7 +25,19 @@ const FlightTable = () => {
 
     const handleClick = () => {
         if (selectedFlight !== null) {
-            navigate('/confirm-booking', {state: {numSeat, selectedFlight, depAirport, arrAirport, flightDate, flightData}})
+            if (booking === undefined) {
+                navigate('/confirm-booking', {state: {numSeat, selectedFlight, depAirport, arrAirport, flightDate, flightData}})
+            } else {
+                axios.put(`/booking/${booking.bookingId}`, {flightNum: selectedFlight.flightNum, numSeat: numSeat})
+                .then((res) => {
+                    // console.log(res.data)
+                    booking = res.data
+                    navigate(`/edit-booking`, {state: {booking}})
+                })
+                .catch((theseHands) => {
+                    console.log(theseHands)
+                })
+            }
         } else {
             alert('Please select a flight')
         }
