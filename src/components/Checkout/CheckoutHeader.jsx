@@ -5,8 +5,7 @@ const CheckoutHeader = () => {
         <tr>
             <th>Airline</th>
             <th>Flight</th>
-            <th>Number of Travelers</th>
-            <th>Total Price</th>
+            <th>Travelers</th>
         </tr>
     )
 }

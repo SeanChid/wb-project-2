@@ -66,7 +66,7 @@ const TravelForm = () => {
             </label>
             <br/>
 
-            <button type="submit">Submit</button>
+            <button type="submit">Search Flights</button>
         </form>
     )
 }

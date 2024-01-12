@@ -1,8 +1,3 @@
-import axios from 'axios'
-
-import React from 'react'
-
-import { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 
 const BookingDetailsDisplay = () => {
@@ -11,7 +6,10 @@ const BookingDetailsDisplay = () => {
     const {booking} = location.state
 
     return (
-        <div>Your Booking Id:{booking.bookingId}</div>
+        <div>
+            <h1>Thanks for Booking!</h1>
+            <h2>Your Booking Id: {booking.bookingId}</h2>
+        </div>
     )
 }
 

@@ -20,7 +20,6 @@ const CheckoutDisplay = () => {
         axios.post('/booking', {numSeat: numSeat, flightNum: selectedFlight.flightNum})
         .then((res) => {
             setBooking(res.data)
-            console.log(res.data)
             navigate('/booking-details', {state: {booking: res.data}})
         })
         .catch((theseHands) => {
@@ -39,6 +38,9 @@ const CheckoutDisplay = () => {
                     <CheckoutRow numSeat={numSeat} selectedFlight={selectedFlight}/>
                 </tbody>
             </table>
+            <h3>
+                Total: ${selectedFlight.price * numSeat}
+            </h3>
             <CheckoutConfirm handleClick={handleClick}/>
         </div>
     )

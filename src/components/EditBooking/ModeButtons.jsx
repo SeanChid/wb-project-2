@@ -1,6 +1,6 @@
 const ModeButtons = (props) => {
 
-    const {isEditing, changeEditMode, changeNormalMode} = props
+    const {isEditing, changeEditMode, changeNormalMode, handleDelete} = props
 
     if (isEditing) {
         return (
@@ -9,7 +9,12 @@ const ModeButtons = (props) => {
             </div>
         )
     } else {
-        return <button onClick={changeEditMode}>Edit</button>
+        return (
+            <div>
+                <button onClick={changeEditMode}>Edit</button>
+                <button onClick={handleDelete}>Delete</button>
+            </div>
+        )
     }
 }
 

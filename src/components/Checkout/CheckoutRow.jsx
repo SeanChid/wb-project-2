@@ -9,7 +9,6 @@ const CheckoutRow = (props) => {
             <td>{selectedFlight.airline}</td>
             <td>{selectedFlight.flightNum}</td>
             <td>{numSeat}</td>
-            <td>${selectedFlight.price * numSeat}</td>
         </tr>
     )
 }
