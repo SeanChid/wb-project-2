@@ -6,8 +6,8 @@ const CheckoutRow = (props) => {
 
     return (
         <tr>
-            <td>{selectedFlight.airline}</td>
-            <td>{selectedFlight.flightNum}</td>
+            <td>{selectedFlight.carrier.icao}</td>
+            <td>{selectedFlight.flightNumber}</td>
             <td>{numSeat}</td>
         </tr>
     )

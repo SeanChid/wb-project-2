@@ -10,9 +10,10 @@ app.use(express.urlencoded({extended: false}))
 app.use(morgan('dev'))
 
 import handlerFunctions from "./controller.js";
-const {getFlights, getBookings, getOneBooking, addBooking, deleteBooking, editBooking} = handlerFunctions
+const {getFlights, addFlight, getBookings, getOneBooking, addBooking, deleteBooking, editBooking} = handlerFunctions
 
 app.get('/flights', getFlights)
+app.post('/flight', addFlight)
 app.get('/bookings', getBookings)
 app.get('/booking/:bookingId', getOneBooking)
 app.post('/booking', addBooking)

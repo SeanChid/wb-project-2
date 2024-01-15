@@ -5,6 +5,7 @@ import TableRow from './TableRow.jsx'
 import axios from 'axios'
 import { useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
+import { Table } from 'react-bootstrap'
 
 const FlightTable = () => {
 
@@ -17,7 +18,7 @@ const FlightTable = () => {
     const navigate = useNavigate()
 
     const row = flightData.map((el) => <TableRow
-        key={el.flightNum}
+        key={el.scheduleInstanceKey}
         flightData={el}
         selectedFlight={selectedFlight}
         setSelectedFlight={setSelectedFlight}
@@ -45,7 +46,8 @@ const FlightTable = () => {
 
     return (
         <div>
-            <table>
+            <h3>Showing flights between {depAirport} and {arrAirport} on {flightDate}</h3>
+            <Table striped>
                 <thead>
                     <TableHeader />
                 </thead>
@@ -53,7 +55,7 @@ const FlightTable = () => {
                 <tbody>
                     {row}
                 </tbody>
-            </table>
+            </Table>
             <ConfirmFlightButton handleClick={handleClick}/>
         </div>
     )

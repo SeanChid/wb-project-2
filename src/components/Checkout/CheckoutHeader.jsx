@@ -3,7 +3,7 @@ import React from 'react'
 const CheckoutHeader = () => {
     return (
         <tr>
-            <th>Airline</th>
+            <th>Airline Code</th>
             <th>Flight</th>
             <th>Travelers</th>
         </tr>

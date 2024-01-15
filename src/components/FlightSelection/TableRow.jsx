@@ -8,10 +8,10 @@ const TableRow = (props) => {
     }
 
     return (
-        <tr key={flightData.flightNum}>
-            <td>{flightData.airline}</td>
-            <td>{flightData.flightNum}</td>
-            <td>{flightData.flightDate}</td>
+        <tr key={flightData.scheduleInstanceKey}>
+            <td>{flightData.carrier.iata}</td>
+            <td>{flightData.flightNumber}</td>
+            <td>{flightData.departure.time.local}</td>
             <td>{flightData.availSeats}</td>
             <td>${flightData.price}</td>
             <td>

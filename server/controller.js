@@ -4,7 +4,7 @@ import { Op } from 'sequelize'
 const handlerFunctions = {
 
     getFlights: async (req, res) => {
-        const {flightDate, depAirport, arrAirport } = req.query
+        const {flightDate, depAirport, arrAirport} = req.query
 
         const query = {}
         if (flightDate) {
@@ -26,6 +26,24 @@ const handlerFunctions = {
             where: query
         })
 
+        res.send(flightData)
+    },
+
+    addFlight: async (req, res) => {
+        const {scheduleInstanceKey} = req.body
+
+        const seats = 200
+
+        const amount = 300
+
+        const newFlight = {
+            scheduleInstanceKey,
+            availSeats: seats,
+            price: amount
+        }
+
+        const flightData = await Flight.create(newFlight)
+        
         res.send(flightData)
     },
 
