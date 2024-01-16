@@ -7,20 +7,21 @@ const GetBookingForm = () => {
     const navigate = useNavigate()
 
     const [bookingId, setBookingId] = useState(0)
+    const [email, setEmail] = useState('')
     const [showErrorModal, setShowErrorModal] = useState(false)
     const [errorMessage, setErrorMessage] = useState('')
 
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        axios.get(`/booking/${bookingId}`)
+        axios.get(`/booking/?bookingId=${bookingId}&userEmail=${email}`)
         .then((res) => {
-            const booking = res.data
+            const booking = res.data[0]
 
-            if (booking) {
+            if (booking && email) {
                 navigate('/edit-booking', {state: {booking}})
             } else {
-                setErrorMessage('Invalid Booking ID')
+                setErrorMessage('Invalid Booking ID or Email')
                 setShowErrorModal(true)
             }
         })
@@ -46,7 +47,15 @@ const GetBookingForm = () => {
                     />
                 </label>
                 <br/>
-
+                <label>
+                    Enter your email:
+                    <input 
+                        type='email'
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
+                </label>
+                <br/>
                 <button type='submit'>Submit</button>
             </form>
 

@@ -9,6 +9,7 @@ const EditBookingHeader = (props) => {
     ) : (
         <tr>
             <th>Booking ID</th>
+            <th>Email</th>
             <th>Date</th>
             <th>Airline</th>
             <th>Flight</th>

@@ -49,6 +49,7 @@ const EditBookingRow = (props) => {
     ) : (
         <tr>
             <td>{booking.bookingId}</td>
+            <td>{booking.userEmail}</td>
             <td>{booking.flightDate}</td>
             <td>{booking.airline}</td>
             <td>{booking.flightNum}</td>

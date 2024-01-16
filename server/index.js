@@ -15,7 +15,7 @@ const {getFlights, addFlight, getBookings, getOneBooking, addBooking, deleteBook
 app.get('/flights', getFlights)
 app.post('/flight', addFlight)
 app.get('/bookings', getBookings)
-app.get('/booking/:bookingId', getOneBooking)
+app.get('/booking', getOneBooking)
 app.post('/booking', addBooking)
 app.delete('/booking/:bookingId', deleteBooking)
 app.put('/booking/:bookingId', editBooking)

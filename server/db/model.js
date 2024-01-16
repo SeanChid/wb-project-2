@@ -18,6 +18,9 @@ Booking.init(
             primaryKey: true,
             unique: true
         },
+        userEmail: {
+            type: DataTypes.STRING
+        },
         scheduleInstanceKey: {
             type: DataTypes.STRING
         },

@@ -6,6 +6,7 @@ import CheckoutConfirm from './CheckoutConfirm.jsx'
 
 import { useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
+import { Table } from 'react-bootstrap'
 
 const CheckoutDisplay = () => {
 
@@ -13,6 +14,7 @@ const CheckoutDisplay = () => {
     const {numSeat, selectedFlight, seatData, depAirport, arrAirport, flightDate} = location.state
 
     const [booking, setBooking] = useState([])
+    const [email, setEmail] = useState('')
 
     const navigate = useNavigate()
 
@@ -21,6 +23,7 @@ const CheckoutDisplay = () => {
         {
         numSeat: numSeat,
         scheduleInstanceKey: selectedFlight.scheduleInstanceKey,
+        userEmail: email,
         airline: selectedFlight.carrier.icao,
         flightNum: selectedFlight.flightNumber,
         flightDate: flightDate,
@@ -38,7 +41,7 @@ const CheckoutDisplay = () => {
 
     return (
         <div>
-            <table>
+            <Table striped>
                 <thead>
                     <CheckoutHeader />
                 </thead>
@@ -46,10 +49,19 @@ const CheckoutDisplay = () => {
                 <tbody>
                     <CheckoutRow numSeat={numSeat} selectedFlight={selectedFlight}/>
                 </tbody>
-            </table>
+            </Table>
             <h3>
                 Total: ${seatData[selectedFlight.scheduleInstanceKey].price * numSeat}
             </h3>
+            <label>
+                Enter your email:
+                <input
+                    type='email'
+                    value={email}
+                    onChange={(e) => {setEmail(e.target.value)}}
+                />
+            </label>
+            <br/>
             <CheckoutConfirm handleClick={handleClick}/>
         </div>
     )

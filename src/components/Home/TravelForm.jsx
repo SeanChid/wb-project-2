@@ -39,7 +39,6 @@ const TravelForm = () => {
             },
           }
 
-        // axios.get(`/flights?flightDate=${flightDate}&depAirport=${depAirport}&arrAirport=${arrAirport}`)
         axios.request(options)
         .then((res) => {
             const flightData = res.data.data

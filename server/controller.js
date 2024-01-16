@@ -19,7 +19,7 @@ const handlerFunctions = {
             query.depAirport = depAirport
         }
         if (arrAirport) {
-            query.arrAirport= arrAirport
+            query.arrAirport = arrAirport
         }
 
         const flightData = await Flight.findAll({
@@ -60,13 +60,24 @@ const handlerFunctions = {
     },
 
     getOneBooking: async (req, res) => {
-        const {bookingId} = req.params
-        const booking = await Booking.findByPk(bookingId)
+        const {bookingId, userEmail} = req.params
+
+        const query = {}
+        if (bookingId) {
+            query.bookingId
+        }
+        if (userEmail) {
+            query.userEmail
+        }
+        const booking = await Booking.findAll({
+            where: query
+        })
+        
         res.send(booking)
     },
 
     addBooking: async (req, res) => {
-        const {scheduleInstanceKey, airline, flightNum, flightDate, depAirport, arrAirport, numSeat} = req.body
+        const {scheduleInstanceKey, userEmail, airline, flightNum, flightDate, depAirport, arrAirport, numSeat} = req.body
         
         const flight = await Flight.findByPk(scheduleInstanceKey) 
 
@@ -75,6 +86,7 @@ const handlerFunctions = {
         const newBooking = {
             bookingId: id,
             scheduleInstanceKey: scheduleInstanceKey,
+            userEmail,
             airline,
             flightNum,
             flightDate,
