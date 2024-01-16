@@ -1,6 +1,7 @@
 const TableRow = (props) => {
 
-    const {flightData, selectedFlight, setSelectedFlight} = props
+    const {flightData, seatData, selectedFlight, setSelectedFlight} = props
+    // console.log(seatData)
 
     const handleFlightSelection = (flight) => {
         
@@ -12,8 +13,8 @@ const TableRow = (props) => {
             <td>{flightData.carrier.iata}</td>
             <td>{flightData.flightNumber}</td>
             <td>{flightData.departure.time.local}</td>
-            <td>{flightData.availSeats}</td>
-            <td>${flightData.price}</td>
+            <td>{seatData.availSeats}</td>
+            <td>${seatData.price}</td>
             <td>
                 <button onClick={() => handleFlightSelection(flightData)}>
                     Select

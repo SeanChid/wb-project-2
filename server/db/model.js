@@ -18,6 +18,9 @@ Booking.init(
             primaryKey: true,
             unique: true
         },
+        scheduleInstanceKey: {
+            type: DataTypes.STRING
+        },
         flightDate: {
             type: DataTypes.DATE,
             get() {
@@ -57,29 +60,33 @@ class Flight extends Model {
 
 Flight.init(
     {
-        flightNum: {
-            type: DataTypes.INTEGER,
+        // flightNum: {
+        //     type: DataTypes.INTEGER,
+        //     primaryKey: true
+        // },
+        scheduleInstanceKey: {
+            type: DataTypes.STRING,
             primaryKey: true
         },
-        flightDate: {
-            type: DataTypes.DATE,
-            allowNull: false,
-            get() {
-                const rawValue = this.getDataValue('flightDate')
-                return rawValue ? rawValue.toISOString().split('T')[0] : null
-            }
-        },
-        airline: {
-            type: DataTypes.STRING
-        },
-        depAirport: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
-        arrAirport: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
+        // flightDate: {
+        //     type: DataTypes.DATE,
+        //     allowNull: false,
+        //     get() {
+        //         const rawValue = this.getDataValue('flightDate')
+        //         return rawValue ? rawValue.toISOString().split('T')[0] : null
+        //     }
+        // },
+        // airline: {
+        //     type: DataTypes.STRING
+        // },
+        // depAirport: {
+        //     type: DataTypes.STRING,
+        //     allowNull: false
+        // },
+        // arrAirport: {
+        //     type: DataTypes.STRING,
+        //     allowNull: false
+        // },
         availSeats: {
             type: DataTypes.INTEGER
         },
@@ -91,9 +98,9 @@ Flight.init(
     }
 )
 
-Flight.hasMany(Booking, {foreignKey: 'flightNum'})
+Flight.hasMany(Booking, {foreignKey: 'scheduleInstanceKey'})
 
-Booking.belongsTo(Flight, {foreignKey: 'flightNum'})
+Booking.belongsTo(Flight, {foreignKey: 'scheduleInstanceKey'})
 
 if (process.argv[1] === url.fileURLToPath(import.meta.url)) {
     console.log('Syncing database...');

@@ -55,7 +55,7 @@ const EditBookingRow = (props) => {
             <td>{booking.depAirport}</td>
             <td>{booking.arrAirport}</td>
             <td>{booking.numSeat}</td>
-            <td>{booking.totalPrice}</td>
+            <td>${booking.totalPrice}</td>
         </tr>
     )
 }

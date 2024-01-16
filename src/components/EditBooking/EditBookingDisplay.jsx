@@ -63,10 +63,28 @@ const EditBookingDisplay = () => {
 
     const submitEdit = (e) => {
         e.preventDefault()
-        axios.get(`/flights?flightDate=${flightDate}&depAirport=${depAirport}&arrAirport=${arrAirport}`)
+
+        const options = {
+            method: 'GET',
+            url: 'https://flight-info-api.p.rapidapi.com/schedules',
+            params: {
+              version: 'v2',
+              DepartureDateTime: flightDate,
+              DepartureAirport: depAirport,
+              ArrivalAirport: arrAirport,
+              CodeType: 'IATA'
+            },
+            headers: {
+              'X-RapidAPI-Key': '12e868868amsha19599d95cba5ebp12d252jsn3121cc4e2732',
+              'X-RapidAPI-Host': 'flight-info-api.p.rapidapi.com',
+            },
+          }
+
+        axios.request(options)
         .then((res) => {
-            const flightData = res.data
-            navigate('/flight-selection', {state: {booking, flightData, numSeat}})
+            console.log(res.data.data)
+            const flightData = res.data.data
+            navigate('/flight-selection', {state: {booking, depAirport, arrAirport, numSeat, flightDate, flightData}})
         })
         .catch((theseHands) => {
             console.log(theseHands)

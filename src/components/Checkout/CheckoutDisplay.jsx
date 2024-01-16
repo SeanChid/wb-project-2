@@ -10,14 +10,23 @@ import { useNavigate, useLocation } from 'react-router-dom'
 const CheckoutDisplay = () => {
 
     const location = useLocation()
-    const {numSeat, selectedFlight} = location.state
+    const {numSeat, selectedFlight, seatData, depAirport, arrAirport, flightDate} = location.state
 
     const [booking, setBooking] = useState([])
 
     const navigate = useNavigate()
 
     const handleClick = () => {
-        axios.post('/booking', {numSeat: numSeat, flightNum: selectedFlight.flightNum})
+        axios.post('/booking', 
+        {
+        numSeat: numSeat,
+        scheduleInstanceKey: selectedFlight.scheduleInstanceKey,
+        airline: selectedFlight.carrier.icao,
+        flightNum: selectedFlight.flightNumber,
+        flightDate: flightDate,
+        depAirport: depAirport,
+        arrAirport: arrAirport
+        })
         .then((res) => {
             setBooking(res.data)
             navigate('/booking-details', {state: {booking: res.data}})
@@ -39,7 +48,7 @@ const CheckoutDisplay = () => {
                 </tbody>
             </table>
             <h3>
-                Total: ${selectedFlight.price * numSeat}
+                Total: ${seatData[selectedFlight.scheduleInstanceKey].price * numSeat}
             </h3>
             <CheckoutConfirm handleClick={handleClick}/>
         </div>

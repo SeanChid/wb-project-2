@@ -30,21 +30,28 @@ const handlerFunctions = {
     },
 
     addFlight: async (req, res) => {
-        const {scheduleInstanceKey} = req.body
+        try {
+            const {scheduleInstanceKey} = req.body
 
-        const seats = 200
+            const existingFlight = await Flight.findOne({where: {scheduleInstanceKey}})
 
-        const amount = 300
+            if (existingFlight) {
+                return res.send(existingFlight)
+            }
 
-        const newFlight = {
-            scheduleInstanceKey,
-            availSeats: seats,
-            price: amount
+            const seats = 200
+            const amount = 300
+
+            const newFlight = {
+                scheduleInstanceKey,
+                availSeats: seats,
+                price: amount
+            }
+            const flightData = await Flight.create(newFlight)
+            res.send(flightData)
+        } catch (error) {
+            console.log(error)
         }
-
-        const flightData = await Flight.create(newFlight)
-        
-        res.send(flightData)
     },
 
     getBookings: async (req, res) => {
@@ -59,14 +66,15 @@ const handlerFunctions = {
     },
 
     addBooking: async (req, res) => {
-        const {airline, flightNum, flightDate, depAirport, arrAirport, numSeat} = req.body
+        const {scheduleInstanceKey, airline, flightNum, flightDate, depAirport, arrAirport, numSeat} = req.body
         
-        const flight = await Flight.findByPk(flightNum)
+        const flight = await Flight.findByPk(scheduleInstanceKey) 
 
         const id = Math.floor(1000000 + Math.random() * 9000000)
 
         const newBooking = {
             bookingId: id,
+            scheduleInstanceKey: scheduleInstanceKey,
             airline,
             flightNum,
             flightDate,
@@ -75,10 +83,10 @@ const handlerFunctions = {
             numSeat
         }
 
-        newBooking.airline = flight.airline
-        newBooking.flightDate = flight.flightDate
-        newBooking.depAirport = flight.depAirport
-        newBooking.arrAirport = flight.arrAirport
+        // newBooking.airline = flight.airline
+        // newBooking.flightDate = flight.flightDate
+        // newBooking.depAirport = flight.depAirport
+        // newBooking.arrAirport = flight.arrAirport
 
         flight.availSeats -= numSeat
         newBooking.totalPrice = flight.price * numSeat
@@ -93,9 +101,9 @@ const handlerFunctions = {
         const {bookingId} = req.params
 
         const currentBooking = await Booking.findByPk(bookingId)
-        const flight = await Flight.findByPk(currentBooking.flightNum)
+        const flight = await Flight.findByPk(currentBooking.scheduleInstanceKey)
 
-        if (currentBooking.flightNum === null) {
+        if (currentBooking.scheduleInstanceKey === null) {
             await currentBooking.destroy()
         } else {
             flight.availSeats += currentBooking.numSeat
@@ -110,13 +118,13 @@ const handlerFunctions = {
 
     editBooking: async (req, res) => {
         const {bookingId} = req.params
-        const {flightNum, numSeat} = req.body
+        const {scheduleInstanceKey, flightDate, airline, flightNum, depAirport, arrAirport, numSeat} = req.body
 
         const currentBooking = await Booking.findByPk(bookingId)
-        const currentFlight = await Flight.findByPk(currentBooking.flightNum)
-        const newFlight = await Flight.findByPk(flightNum)
+        const currentFlight = await Flight.findByPk(currentBooking.scheduleInstanceKey)
+        const newFlight = await Flight.findByPk(scheduleInstanceKey)
 
-        if (currentBooking.flightNum === newFlight.flightNum) {
+        if (currentBooking.scheduleInstanceKey === newFlight.scheduleInstanceKey) {
             currentBooking.setFlight(currentFlight)
             currentFlight.availSeats += currentBooking.numSeat
             currentFlight.availSeats -= numSeat
@@ -128,16 +136,17 @@ const handlerFunctions = {
             currentFlight.availSeats += currentBooking.numSeat
             currentBooking.setFlight(newFlight)
             newFlight.availSeats -= numSeat
-            currentBooking.flightDate = newFlight.flightDate
-            currentBooking.airline = newFlight.airline
-            currentBooking.depAirport = newFlight.depAirport
-            currentBooking.arrAirport = newFlight.arrAirport
             currentBooking.totalPrice = newFlight.price * numSeat
-
+            
             await currentFlight.save()
             await newFlight.save()
         }
         
+        currentBooking.flightDate = flightDate
+        currentBooking.airline = airline
+        currentBooking.flightNum = flightNum
+        currentBooking.depAirport = depAirport
+        currentBooking.arrAirport = arrAirport
         currentBooking.numSeat = numSeat
         
         await currentBooking.save()
