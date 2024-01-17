@@ -8,6 +8,7 @@ const CheckoutRow = (props) => {
         <tr>
             <td>{selectedFlight.carrier.icao}</td>
             <td>{selectedFlight.flightNumber}</td>
+            <td>{selectedFlight.departure.time.local}</td>
             <td>{numSeat}</td>
         </tr>
     )

@@ -9,6 +9,7 @@ const BookingDetailsDisplay = () => {
         <div>
             <h1>Thanks for Booking!</h1>
             <h2>Your Booking Id: {booking.bookingId}</h2>
+            <h2>This will be sent to your email</h2>
         </div>
     )
 }

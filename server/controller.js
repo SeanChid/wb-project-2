@@ -30,28 +30,24 @@ const handlerFunctions = {
     },
 
     addFlight: async (req, res) => {
-        try {
-            const {scheduleInstanceKey} = req.body
-
-            const existingFlight = await Flight.findOne({where: {scheduleInstanceKey}})
-
-            if (existingFlight) {
-                return res.send(existingFlight)
-            }
-
-            const seats = 200
-            const amount = 300
-
-            const newFlight = {
-                scheduleInstanceKey,
-                availSeats: seats,
-                price: amount
-            }
-            const flightData = await Flight.create(newFlight)
-            res.send(flightData)
-        } catch (error) {
-            console.log(error)
+        const {scheduleInstanceKey} = req.body
+    
+        const existingFlight = await Flight.findOne({where: {scheduleInstanceKey}})
+    
+        if (existingFlight) {
+            return res.send(existingFlight)
         }
+    
+        const seats = 200
+        const amount = Math.floor(Math.random() * (100 - 5 + 1) + 5) * 10
+    
+        const newFlight = {
+            scheduleInstanceKey,
+            availSeats: seats,
+            price: amount
+        }
+        const flightData = await Flight.create(newFlight)
+        res.send(flightData)
     },
 
     getBookings: async (req, res) => {
@@ -72,7 +68,7 @@ const handlerFunctions = {
         const booking = await Booking.findAll({
             where: query
         })
-        
+
         res.send(booking)
     },
 

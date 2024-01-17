@@ -5,7 +5,7 @@ import TableRow from './TableRow.jsx'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
-import { Table } from 'react-bootstrap'
+import { Table, Modal, Button } from 'react-bootstrap'
 
 const FlightTable = () => {
 
@@ -15,6 +15,7 @@ const FlightTable = () => {
 
     const [seatData, setSeatData] = useState([])
     const [selectedFlight, setSelectedFlight] = useState(null)
+    const [showErrorModal, setShowErrorModal] = useState(false)
 
     useEffect(() => {
 
@@ -56,6 +57,10 @@ const FlightTable = () => {
         setSelectedFlight={setSelectedFlight}
     />)
 
+    const handleCloseErrorModal = () => {
+        setShowErrorModal(false)
+    }
+
     const handleClick = () => {
         if (selectedFlight !== null) {
             if (booking === undefined) {
@@ -81,7 +86,7 @@ const FlightTable = () => {
                 })
             }
         } else {
-            alert('Please select a flight')
+            setShowErrorModal(true)
         }
     }
 
@@ -98,6 +103,20 @@ const FlightTable = () => {
                 </tbody>
             </Table>
             <ConfirmFlightButton handleClick={handleClick}/>
+
+            <Modal show={showErrorModal} onHide={handleCloseErrorModal} centered>
+                <Modal.Header closeButton>
+                    <Modal.Title>Error</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <h4>Please select a flight</h4>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="danger" onClick={handleCloseErrorModal}>
+                        Close
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </div>
     )
 }

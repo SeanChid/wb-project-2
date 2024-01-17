@@ -102,7 +102,7 @@ const TravelForm = () => {
                     <Modal.Title>Error</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <p>{errorMessage}</p>
+                    <h4>{errorMessage}</h4>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="danger" onClick={handleCloseErrorModal}>

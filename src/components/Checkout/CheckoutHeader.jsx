@@ -5,6 +5,7 @@ const CheckoutHeader = () => {
         <tr>
             <th>Airline Code</th>
             <th>Flight</th>
+            <th>Departure Time</th>
             <th>Travelers</th>
         </tr>
     )
