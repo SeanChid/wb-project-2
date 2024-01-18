@@ -4,7 +4,7 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import EditBookingHeader from './EditBookingHeader.jsx'
 import EditBookingRow from './EditBookingRow.jsx'
 import ModeButtons from './ModeButtons.jsx'
-import { Modal, Button, Table } from 'react-bootstrap'
+import { Modal, Button, Table, Container } from 'react-bootstrap'
 
 const DeleteConfirmationModal = ({show, handleClose, handleDelete}) => {
     return (
@@ -93,7 +93,7 @@ const EditBookingDisplay = () => {
 
     
     return (
-        <div>
+        <Container fluid>
             <h2>Booking Details:</h2>
             <br/>
             <Table striped>
@@ -130,7 +130,7 @@ const EditBookingDisplay = () => {
                 handleClose={hideDeleteModal}
                 handleDelete={handleDelete}
             />
-        </div>
+        </Container>
     )
 }
 

@@ -1,6 +1,7 @@
 import TableHeader from './TableHeader.jsx'
 import ConfirmFlightButton from './ConfirmFlightButton.jsx'
 import TableRow from './TableRow.jsx'
+import { Container } from 'react-bootstrap'
 
 import axios from 'axios'
 import { useState, useEffect } from 'react'
@@ -91,7 +92,7 @@ const FlightTable = () => {
     }
 
     return (
-        <div>
+        <Container fluid>
             <h2>Select a flight:</h2>
             <h3>Showing flights from {depAirport} to {arrAirport} on {flightDate}</h3>
             <Table striped>
@@ -118,7 +119,7 @@ const FlightTable = () => {
                     </Button>
                 </Modal.Footer>
             </Modal>
-        </div>
+        </Container>
     )
 }
 

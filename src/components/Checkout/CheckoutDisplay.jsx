@@ -6,7 +6,7 @@ import CheckoutConfirm from './CheckoutConfirm.jsx'
 
 import { useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
-import { Table, Modal, Button } from 'react-bootstrap'
+import { Table, Modal, Button, Container } from 'react-bootstrap'
 
 const CheckoutDisplay = () => {
 
@@ -49,7 +49,7 @@ const CheckoutDisplay = () => {
     }
 
     return (
-        <div>
+        <Container fluid>
             <h2>Checkout Details</h2>
             <Table striped>
                 <thead>
@@ -82,13 +82,13 @@ const CheckoutDisplay = () => {
                 <Modal.Body>
                     <h4>Please enter an email</h4>
                 </Modal.Body>
-                <Modal.Footer class>
-                    <Button variant="danger" onClick={handleCloseErrorModal}>
+                <Modal.Footer className='bg-custom'>
+                    <Button variant="primary" onClick={handleCloseErrorModal}>
                         Close
                     </Button>
                 </Modal.Footer>
             </Modal>
-        </div>
+        </Container>
     )
 }
 
