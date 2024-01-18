@@ -9,17 +9,17 @@ import { Modal, Button, Table } from 'react-bootstrap'
 const DeleteConfirmationModal = ({show, handleClose, handleDelete}) => {
     return (
         <Modal show={show} onHide={handleClose}>
-            <Modal.Header closeButton>
+            <Modal.Header className='bg-custom' closeButton>
                 <Modal.Title>Confirm Delete</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <h3>Are you sure you want to delete this booking?</h3>
             </Modal.Body>
-            <Modal.Footer>
+            <Modal.Footer className='bg-custom'>
                 <Button variant='secondary' onClick={handleClose}>
                     Cancel
                 </Button>
-                <Button variant='danger' onClick={handleDelete}>
+                <Button variant='primary' onClick={handleDelete}>
                     Delete
                 </Button>
             </Modal.Footer>
@@ -96,7 +96,7 @@ const EditBookingDisplay = () => {
         <div>
             <h2>Booking Details:</h2>
             <br/>
-            <Table striped bordered hover>
+            <Table striped>
                 <thead>
                     <EditBookingHeader 
                         isEditing={isEditing}

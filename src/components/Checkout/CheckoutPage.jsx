@@ -1,14 +1,13 @@
-import React from 'react'
-
 import CheckoutDisplay from './CheckoutDisplay.jsx'
 import ReturnToFlightSelection from './ReturnToFlightSelection.jsx'
+import { Container } from 'react-bootstrap'
 
 const CheckoutPage = () => {
     return (
-        <div>
+        <Container fluid className='border border-5 bg-custom'>
             <CheckoutDisplay />
             <ReturnToFlightSelection />
-        </div>
+        </Container>
     )
 }
 

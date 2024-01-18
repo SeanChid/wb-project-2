@@ -50,6 +50,7 @@ const CheckoutDisplay = () => {
 
     return (
         <div>
+            <h2>Checkout Details</h2>
             <Table striped>
                 <thead>
                     <CheckoutHeader />
@@ -62,10 +63,11 @@ const CheckoutDisplay = () => {
             <h3>
                 Total: ${seatData[selectedFlight.scheduleInstanceKey].price * numSeat}
             </h3>
-            <label>
+            <label className='form-label'>
                 Enter your email:
                 <input
                     type='email'
+                    className='form-control'
                     value={email}
                     onChange={(e) => {setEmail(e.target.value)}}
                 />
@@ -74,13 +76,13 @@ const CheckoutDisplay = () => {
             <CheckoutConfirm handleClick={handleClick}/>
 
             <Modal show={showErrorModal} onHide={handleCloseErrorModal} centered>
-                <Modal.Header closeButton>
+                <Modal.Header closeButton className='bg-custom'>
                     <Modal.Title>Error</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <h4>Please enter an email</h4>
                 </Modal.Body>
-                <Modal.Footer>
+                <Modal.Footer class>
                     <Button variant="danger" onClick={handleCloseErrorModal}>
                         Close
                     </Button>

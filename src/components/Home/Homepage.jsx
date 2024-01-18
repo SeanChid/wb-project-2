@@ -1,14 +1,14 @@
-import React from 'react'
 import TravelForm from './TravelForm.jsx';
 import GetBookingForm from './GetBookingForm.jsx';
+import { Container } from 'react-bootstrap'
 
 const Homepage = () => {
     return (
-        <div>
+        <Container fluid className='border border-5 bg-custom'>
             <TravelForm />
             <br/>
             <GetBookingForm />
-        </div>
+        </Container>
     )
 }
 

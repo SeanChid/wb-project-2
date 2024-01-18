@@ -1,12 +1,13 @@
 import ReturnHomeButton from '../ReturnHomeButton.jsx'
 import EditBookingDisplay from './EditBookingDisplay.jsx'
+import { Container } from 'react-bootstrap'
 
 const EditBookingPage = () => {
     return (
-        <div>
+        <Container fluid className='border border-5 bg-custom'>
             <EditBookingDisplay />
             <ReturnHomeButton />
-        </div>
+        </Container>
     )
 }
 

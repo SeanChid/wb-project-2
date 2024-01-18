@@ -16,7 +16,7 @@ const GetBookingForm = () => {
 
         axios.get(`/booking/?bookingId=${bookingId}&userEmail=${email}`)
         .then((res) => {
-            const booking = res.data[0]
+            const booking = res.data
 
             if (booking && email) {
                 navigate('/edit-booking', {state: {booking}})
@@ -35,44 +35,46 @@ const GetBookingForm = () => {
     }
 
     return (
-        <>
+        <div className='container'>
             <form onSubmit={handleSubmit}>
                 <h3>Already have a reservation?</h3>
-                <label>
+                <label className='form-label'>
                     Enter Your Booking ID:
                     <input
                         type='number'
                         value={bookingId}
+                        className='form-control'
                         onChange={(e) => setBookingId(e.target.value)}
                     />
                 </label>
                 <br/>
-                <label>
+                <label className='form-label'>
                     Enter your email:
                     <input 
                         type='email'
                         value={email}
+                        className='form-control'
                         onChange={(e) => setEmail(e.target.value)}
                     />
                 </label>
                 <br/>
-                <button type='submit'>Submit</button>
+                <button type='submit' className='btn btn-primary'>Submit</button>
             </form>
 
             <Modal show={showErrorModal} onHide={handleCloseErrorModal} centered>
-                <Modal.Header closeButton>
+                <Modal.Header closeButton className='bg-custom'>
                     <Modal.Title>Error</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <h4>{errorMessage}</h4>
                 </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="danger" onClick={handleCloseErrorModal}>
+                <Modal.Footer className='bg-custom'>
+                    <Button variant="primary" onClick={handleCloseErrorModal}>
                         Close
                     </Button>
                 </Modal.Footer>
             </Modal>
-        </>
+        </div>
     )
 }
 

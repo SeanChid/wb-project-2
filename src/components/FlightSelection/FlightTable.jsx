@@ -92,6 +92,7 @@ const FlightTable = () => {
 
     return (
         <div>
+            <h2>Select a flight:</h2>
             <h3>Showing flights from {depAirport} to {arrAirport} on {flightDate}</h3>
             <Table striped>
                 <thead>
@@ -105,14 +106,14 @@ const FlightTable = () => {
             <ConfirmFlightButton handleClick={handleClick}/>
 
             <Modal show={showErrorModal} onHide={handleCloseErrorModal} centered>
-                <Modal.Header closeButton>
+                <Modal.Header closeButton className='bg-custom'>
                     <Modal.Title>Error</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <h4>Please select a flight</h4>
                 </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="danger" onClick={handleCloseErrorModal}>
+                <Modal.Footer className='bg-custom'>
+                    <Button variant="primary" onClick={handleCloseErrorModal}>
                         Close
                     </Button>
                 </Modal.Footer>

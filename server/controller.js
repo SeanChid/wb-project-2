@@ -56,16 +56,16 @@ const handlerFunctions = {
     },
 
     getOneBooking: async (req, res) => {
-        const {bookingId, userEmail} = req.params
+        const {bookingId, userEmail} = req.query
 
         const query = {}
         if (bookingId) {
-            query.bookingId
+            query.bookingId = bookingId
         }
         if (userEmail) {
-            query.userEmail
+            query.userEmail = userEmail
         }
-        const booking = await Booking.findAll({
+        const booking = await Booking.findOne({
             where: query
         })
 

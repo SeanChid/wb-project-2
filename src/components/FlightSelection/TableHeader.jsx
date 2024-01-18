@@ -8,6 +8,7 @@ const TableHeader = () => {
             <th>Departure Time</th>
             <th>Available Seats</th>
             <th>Price</th>
+            <th></th>
         </tr>
     )
 }

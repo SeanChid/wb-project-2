@@ -1,3 +1,6 @@
+@import url('https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css');
+@import 'bootstrap-datepicker/dist/css/bootstrap-datepicker.css';
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -11,6 +14,25 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+html, body {
+  background-color: #205196;
+}
+
+.bg-custom {
+  background-color: #199adf;
+  color: white
+}
+
+.input-group-text {
+  background-color: #007bff;
+  color: #fff;
+  border-color: #007bff;
+}
+
+.bi-calendar {
+  font-size: 1.2rem;
 }
 
 a {
@@ -47,12 +69,11 @@ button {
   transition: border-color 0.25s;
 }
 button:hover {
-  background-color: #00ccff;
+  background-color: #0099ff;
 }
 button:focus,
 button:focus-visible {
-  /* outline: 4px auto -webkit-focus-ring-color; */
-  background-color: #00ccff;
+  background-color: #16d8ff;
 }
 
 @media (prefers-color-scheme: light) {

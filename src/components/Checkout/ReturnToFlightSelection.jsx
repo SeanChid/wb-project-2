@@ -8,11 +8,17 @@ const ReturnToFlightSelection = () => {
 
     const navigate = useNavigate()
 
+    const buttonStyle = {
+        position: 'fixed',
+        top: '10px',
+        left: '10px'
+    }
+
     const handleClick = () => {
         navigate('/flight-selection', {state: {depAirport, arrAirport, numSeat, flightDate, flightData}})
     }
 
-    return <button onClick={handleClick}>Return to Flights</button>
+    return <button style={buttonStyle} className='btn btn-primary' onClick={handleClick}>Return to Flights</button>
 }
 
 export default ReturnToFlightSelection

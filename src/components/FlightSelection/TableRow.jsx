@@ -16,7 +16,7 @@ const TableRow = (props) => {
             <td>{seatData.availSeats}</td>
             <td>${seatData.price}</td>
             <td>
-                <button onClick={() => handleFlightSelection(flightData)}>
+                <button className='btn btn-primary' onClick={() => handleFlightSelection(flightData)}>
                     Select
                 </button>
             </td>

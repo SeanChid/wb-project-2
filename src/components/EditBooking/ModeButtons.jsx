@@ -5,14 +5,14 @@ const ModeButtons = (props) => {
     if (isEditing) {
         return (
             <div>
-                <button onClick={changeNormalMode}>Cancel</button>
+                <button className='btn btn-primary' onClick={changeNormalMode}>Cancel</button>
             </div>
         )
     } else {
         return (
             <div>
-                <button onClick={changeEditMode}>Edit</button>
-                <button onClick={handleDelete}>Delete</button>
+                <button className='btn btn-primary' onClick={changeEditMode}>Edit</button>
+                <button className='btn btn-primary' onClick={handleDelete}>Delete</button>
             </div>
         )
     }
