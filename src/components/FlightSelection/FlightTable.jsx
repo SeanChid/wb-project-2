@@ -72,7 +72,7 @@ const FlightTable = () => {
                     scheduleInstanceKey: selectedFlight.scheduleInstanceKey,
                     numSeat: numSeat,
                     flightDate: flightDate,
-                    airline: selectedFlight.carrier.icao,
+                    airline: selectedFlight.carrier.iata,
                     flightNum: selectedFlight.flightNumber,
                     depAirport: depAirport,
                     arrAirport: arrAirport

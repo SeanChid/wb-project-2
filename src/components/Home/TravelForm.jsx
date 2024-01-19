@@ -43,7 +43,7 @@ const TravelForm = () => {
               CodeType: 'IATA'
             },
             headers: {
-              'X-RapidAPI-Key': '12e868868amsha19599d95cba5ebp12d252jsn3121cc4e2732',
+              'X-RapidAPI-Key': '16ccc05207msh9ebd1fadf845174p13cfbdjsn04587490ac16',
               'X-RapidAPI-Host': 'flight-info-api.p.rapidapi.com',
             },
           }

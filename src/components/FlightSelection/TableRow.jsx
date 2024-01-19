@@ -1,7 +1,6 @@
 const TableRow = (props) => {
 
     const {flightData, seatData, selectedFlight, setSelectedFlight} = props
-    // console.log(seatData)
 
     const handleFlightSelection = (flight) => {
         

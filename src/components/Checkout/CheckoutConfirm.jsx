@@ -4,7 +4,7 @@ const CheckoutConfirm = (props) => {
 
     const {handleClick} = props
 
-    return <button onClick={handleClick}>Confirm</button>
+    return <button className='btn btn-primary' onClick={handleClick}>Confirm</button>
 }
 
 export default CheckoutConfirm
