@@ -13,7 +13,7 @@ const DeleteConfirmationModal = ({show, handleClose, handleDelete}) => {
                 <Modal.Title>Confirm Delete</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <h3>Are you sure you want to delete this booking?</h3>
+                <h4>Are you sure you want to delete this booking?</h4>
             </Modal.Body>
             <Modal.Footer className='bg-custom'>
                 <Button variant='secondary' onClick={handleClose}>

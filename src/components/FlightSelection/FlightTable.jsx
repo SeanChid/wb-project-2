@@ -78,7 +78,6 @@ const FlightTable = () => {
                     arrAirport: arrAirport
                 })
                 .then((res) => {
-                    // console.log(res.data)
                     booking = res.data
                     navigate(`/edit-booking`, {state: {booking}})
                 })
